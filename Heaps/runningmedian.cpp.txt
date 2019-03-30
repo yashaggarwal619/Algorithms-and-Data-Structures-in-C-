@@ -1,0 +1,61 @@
+#include <iostream>
+#include<queue>
+#include<vector>
+using namespace std;
+
+
+
+int main() {
+    
+    priority_queue <float,vector<float>,greater<float>>hmin;
+       priority_queue <float,vector<float>>hmax;
+       int n;
+       cin>>n;
+       float x;cin>>x;
+       hmax.push(x);
+       for(int i=1;i<=n;i++)
+       {    int maz=hmax.size();
+        int miz=hmin.size();
+        float mean;
+           if(miz==maz)
+           {
+              mean=float((hmin.top()+hmax.top())/2); 
+              
+           }
+           else
+           if(miz>maz)
+           {
+               mean=float(hmin.top());
+           }
+           else
+           {
+               mean=float(hmax.top());
+           }
+           cout<<mean<<" ";
+           cin>>x;
+           if(x<hmax.top())
+           {
+               hmax.push(x);
+               maz++;
+               if((maz-miz)>1)
+               {
+                   int s=hmax.top();
+                   hmax.pop();
+                   hmin.push(s);
+               }
+               
+           }
+           else
+           {
+               hmin.push(x);
+               miz++;
+               if((miz-maz)>1)
+               {
+                   int s=hmin.top();
+                   hmin.pop();
+                   hmax.push(s);
+               }
+                
+           }
+       }
+}
